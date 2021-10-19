@@ -20,10 +20,10 @@ public class ManagePersonalController implements ManagePersonal {
 	@Override
     public void createSalesMan(SalesMan record) {
         MongoCursor<Document> cursor;
-        long letztID = 0;
+        int letztID = 0;
         cursor = salesManCollection.find().iterator();
         while (cursor.hasNext()) {Document cursorDoc = cursor.next();
-        letztID=(long) cursorDoc.get("_id");
+        letztID=(int) cursorDoc.get("_id");
         }
 
     	Document doc = new Document("_id", letztID + 1)
