@@ -1,5 +1,5 @@
 public class SalesMan {
-    private long id;
+    private int id;
     private String name;
     private String department;
 
@@ -8,7 +8,7 @@ public class SalesMan {
         this.department = department;
     }
 
-    public SalesMan(long id, String name, String department) {
+    public SalesMan(int id, String name, String department) {
         this(name, department);
         this.id = id;
     }

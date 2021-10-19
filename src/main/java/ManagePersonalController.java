@@ -61,7 +61,7 @@ public class ManagePersonalController implements ManagePersonal {
 		try {
 			while (cursor.hasNext()) {
 				Document cursorDoc = cursor.next();
-				SalesMan tmpS = new SalesMan((long) cursorDoc.get("_id"), (String) cursorDoc.get("name"),
+				SalesMan tmpS = new SalesMan(((Long) cursorDoc.get("_id")).intValue(), (String) cursorDoc.get("name"),
 						(String) cursorDoc.get("department"));
 				results.add(tmpS);
 			}
