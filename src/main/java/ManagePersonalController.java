@@ -1,9 +1,7 @@
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
-import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +33,6 @@ public class ManagePersonalController implements ManagePersonal {
 
         System.out.println("Salesman created");
     }
-
-	@Override
-	public void addPerformanceReord(EvaluationRecord record, int sid) {
-
-	}
 
 	@Override
 	public SalesMan readSalesMan(int sid) {
@@ -80,11 +73,6 @@ public class ManagePersonalController implements ManagePersonal {
 	}
 
 	@Override
-	public EvaluationRecord readEvaluationRecords(int sid) {
-		return null;
-	}
-
-	@Override
 	public SalesMan deleteSalesMan(int sid) {
 		SalesMan deltedS = readSalesMan(sid);
 		if (deltedS != null) {
@@ -102,5 +90,25 @@ public class ManagePersonalController implements ManagePersonal {
 			updatedS = readSalesMan(sid); // query the updated item
 		}
 		return updatedS;
+	}
+
+	@Override
+	public void createPerformanceRecord(PerformanceRecord record) {
+
+	}
+
+	@Override
+	public List<PerformanceRecord> readPerformanceRecords(int sid) {
+		return null;
+	}
+
+	@Override
+	public PerformanceRecord deletePerformanceRecord(int id) {
+		return null;
+	}
+
+	@Override
+	public PerformanceRecord updatePerformanceRecord(int id, String key, String value) {
+		return null;
 	}
 }
