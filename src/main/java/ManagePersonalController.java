@@ -9,30 +9,30 @@ import java.util.List;
 public class ManagePersonalController implements ManagePersonal {
 
 	MongoCollection<Document> salesManCollection;
-	MongoCollection<Document> performanceRecordCollection;
-
+	MongoCollection<Document> performanceRecordsCollection;
+;
 	public ManagePersonalController(MongoCollection<Document> collection,
 			MongoCollection<Document> performanceRecordCollection) {
 		this.salesManCollection = collection;
-		this.performanceRecordCollection = performanceRecordCollection;
+		this.performanceRecordsCollection = performanceRecordCollection;
 	}
 
 	@Override
-    public void createSalesMan(SalesMan record) {
-        MongoCursor<Document> cursor;
-        int letztID = 0;
-        cursor = salesManCollection.find().iterator();
-        while (cursor.hasNext()) {Document cursorDoc = cursor.next();
-        letztID=(int) cursorDoc.get("_id");
-        }
+	public void createSalesMan(SalesMan record) {
+		MongoCursor<Document> cursor;
+		int letztID = 0;
+		cursor = salesManCollection.find().iterator();
+		while (cursor.hasNext()) {
+			Document cursorDoc = cursor.next();
+			letztID = (int) cursorDoc.get("_id");
+		}
 
-    	Document doc = new Document("_id", letztID + 1)
-                .append("name", record.getName())
-                .append("department", record.getDepartment());
-        salesManCollection.insertOne(doc);
+		Document doc = new Document("_id", letztID + 1).append("name", record.getName()).append("department",
+				record.getDepartment());
+		salesManCollection.insertOne(doc);
 
-        System.out.println("Salesman created");
-    }
+		System.out.println("Salesman created");
+	}
 
 	@Override
 	public SalesMan readSalesMan(int sid) {
@@ -94,7 +94,21 @@ public class ManagePersonalController implements ManagePersonal {
 
 	@Override
 	public void createPerformanceRecord(PerformanceRecord record) {
+		MongoCursor<Document> cursor;
+		int letztID = 0;		
+		cursor = performanceRecordsCollection.find().iterator();
+		while (cursor.hasNext()) {
+			Document cursorDoc = cursor.next();
+			letztID = (int) cursorDoc.get("_id");
+		}
 
+		Document doc = new Document("_id", letztID + 1).append("sid", record.getsId())
+				.append("description", record.getDescription()).append("targetValue", record.getTargetValue())
+				.append("actualValue", record.getActualValue()).append("year", record.getYear());
+
+		performanceRecordsCollection.insertOne(doc);
+
+		System.out.println("Performance für die ID:"+record.getsId() + " is created");
 	}
 
 	@Override
