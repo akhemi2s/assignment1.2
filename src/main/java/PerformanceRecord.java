@@ -23,6 +23,7 @@ public class PerformanceRecord {
 		this.year = year;
 	}
 
+	
 	public int getId() {
 		return id;
 	}

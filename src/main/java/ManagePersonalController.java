@@ -9,8 +9,8 @@ import java.util.List;
 public class ManagePersonalController implements ManagePersonal {
 
 	MongoCollection<Document> salesManCollection;
-	MongoCollection<Document> performanceRecordsCollection;
-;
+	MongoCollection<Document> performanceRecordsCollection;;
+
 	public ManagePersonalController(MongoCollection<Document> collection,
 			MongoCollection<Document> performanceRecordCollection) {
 		this.salesManCollection = collection;
@@ -95,7 +95,7 @@ public class ManagePersonalController implements ManagePersonal {
 	@Override
 	public void createPerformanceRecord(PerformanceRecord record) {
 		MongoCursor<Document> cursor;
-		int letztID = 0;		
+		int letztID = 0;
 		cursor = performanceRecordsCollection.find().iterator();
 		while (cursor.hasNext()) {
 			Document cursorDoc = cursor.next();
@@ -107,8 +107,7 @@ public class ManagePersonalController implements ManagePersonal {
 				.append("actualValue", record.getActualValue()).append("year", record.getYear());
 
 		performanceRecordsCollection.insertOne(doc);
-
-		System.out.println("Performance für die ID:"+record.getsId() + " is created");
+		System.out.println("Performance für die ID:" + record.getsId() + " is created");
 	}
 
 	@Override
