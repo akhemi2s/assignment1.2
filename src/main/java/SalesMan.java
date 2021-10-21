@@ -44,4 +44,8 @@ public class SalesMan {
                 ", department='" + department + '\'' +
                 '}';
     }
+
+    public static SalesMan generateSalesMan() {
+        return new SalesMan("default", "default" );
+    }
 }
