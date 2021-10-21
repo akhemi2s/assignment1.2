@@ -140,7 +140,7 @@ public class ManagePersonalController implements ManagePersonal {
 			for (PerformanceRecord per : deltedPer)
 				performanceRecordsCollection.deleteOne(Filters.eq("_id", per.getId()));
 
-		return deltedPer;
+		return deltedPer;  
 	}
 
 	@Override

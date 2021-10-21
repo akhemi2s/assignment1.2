@@ -13,7 +13,7 @@ public class SalesMan {
         this.id = id;
     }
     public long getId() {
-        return id;
+        return id; 
     }
 
     public void setId(int id) {

@@ -4,7 +4,7 @@ public class PerformanceRecord {
 	private String description;
 	private int targetValue;
 	private int actualValue;
-	private int year;
+	private int year; 
 
 	public PerformanceRecord(int id, int sId, String description, int targetValue, int actualValue, int year) {
 		this.id = id;
