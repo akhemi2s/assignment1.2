@@ -12,9 +12,8 @@ public class SalesMan {
         this(name, department);
         this.id = id;
     }
-
     public long getId() {
-        return id;
+        return id; 
     }
 
     public void setId(int id) {
