@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         MongoClient mongoClient = new MongoClient();
 
-        MongoDatabase database = mongoClient.getDatabase("test");
+        MongoDatabase database = mongoClient.getDatabase("mongoDB");
 
         MongoCollection<Document> salesmenCollection = database.getCollection("salesmen");
         MongoCollection<Document> performanceRecordsCollection = database.getCollection("performanceRecords");
@@ -157,7 +157,7 @@ public class Main {
                     }
                     scanner = new Scanner(System.in);
                     System.out.println("Enter the description:");
-                    desc = scanner.next();
+                    desc = scanner.nextLine();
 
                     try {
                         System.out.println("Enter the targetValue: ");

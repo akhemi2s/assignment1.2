@@ -10,7 +10,6 @@ public class ManagePersonalController implements ManagePersonal {
 
     MongoCollection<Document> salesManCollection;
     MongoCollection<Document> performanceRecordsCollection;
-    ;
 
     public ManagePersonalController(MongoCollection<Document> collection,
                                     MongoCollection<Document> performanceRecordCollection) {
