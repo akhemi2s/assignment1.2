@@ -14,8 +14,8 @@ public class PerformanceRecord {
 		this.actualValue = actualValue;
 		this.year = year;
 	}
-	
-	public PerformanceRecord( int sId, String description, int targetValue, int actualValue, int year) {
+
+	public PerformanceRecord(int sId, String description, int targetValue, int actualValue, int year) {
 		this.sId = sId;
 		this.description = description;
 		this.targetValue = targetValue;
@@ -23,7 +23,6 @@ public class PerformanceRecord {
 		this.year = year;
 	}
 
-	
 	public int getId() {
 		return id;
 	}
@@ -70,5 +69,11 @@ public class PerformanceRecord {
 
 	public void setYear(int year) {
 		this.year = year;
+	}
+
+	@Override
+	public String toString() {
+		return "PerformanceRecord [id=" + id + ", sId=" + sId + ", description=" + description + ", targetValue="
+				+ targetValue + ", actualValue=" + actualValue + ", year=" + year + "]";
 	}
 }

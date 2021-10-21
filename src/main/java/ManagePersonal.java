@@ -11,9 +11,9 @@ public interface ManagePersonal {
 
     //PerformanceRecord CRUD
     public void createPerformanceRecord( PerformanceRecord record ); //refactored
-    public List<PerformanceRecord> readPerformanceRecords( int sid ); //refactored
-    public PerformanceRecord deletePerformanceRecord(int id); // new
-    public PerformanceRecord updatePerformanceRecord(int id, String key, String value); //new
+    public List<PerformanceRecord> readPerformanceRecords( int sid ,String year ); //refactored
+    public List<PerformanceRecord> deletePerformanceRecord(int id,String year); // new
+    public PerformanceRecord updatePerformanceRecord(int id,String year, String key, String value); //new
 
 }
  

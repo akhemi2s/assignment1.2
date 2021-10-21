@@ -42,7 +42,7 @@ public class ManagePersonalController implements ManagePersonal {
 			s = new SalesMan(sid, (String) tmpDoc.get("name"), (String) tmpDoc.get("department"));
 
 		} catch (NullPointerException e) {
-			System.out.println("SalesMan not found");
+			System.out.print("SalesMan not found");
 		}
 
 		return s;
@@ -111,17 +111,56 @@ public class ManagePersonalController implements ManagePersonal {
 	}
 
 	@Override
-	public List<PerformanceRecord> readPerformanceRecords(int sid) {
-		return null;
+	public List<PerformanceRecord> readPerformanceRecords(int sid, String year) {
+		List<PerformanceRecord> results = new ArrayList<>();
+		MongoCursor<Document> cursor = performanceRecordsCollection.find(Filters.eq("sid", sid)).iterator();
+		while (cursor.hasNext()) {
+			Document cursorDoc = cursor.next();
+			if (year.equals("*")) {
+				PerformanceRecord tmpP = new PerformanceRecord((int) cursorDoc.get("_id"), (int) cursorDoc.get("sid"),
+						(String) cursorDoc.get("description"), (int) cursorDoc.get("targetValue"),
+						(int) cursorDoc.get("actualValue"), (int) cursorDoc.get("year"));
+				results.add(tmpP);
+			} else if ((int) cursorDoc.get("year") == Integer.valueOf(year)) {
+				PerformanceRecord tmpP = new PerformanceRecord((int) cursorDoc.get("_id"), (int) cursorDoc.get("sid"),
+						(String) cursorDoc.get("description"), (int) cursorDoc.get("targetValue"),
+						(int) cursorDoc.get("actualValue"), (int) cursorDoc.get("year"));
+				results.add(tmpP);
+			}
+
+		}
+
+		return results;
 	}
 
 	@Override
-	public PerformanceRecord deletePerformanceRecord(int id) {
-		return null;
+	public List<PerformanceRecord> deletePerformanceRecord(int sid, String year) {
+		List<PerformanceRecord> deltedPer = readPerformanceRecords(sid, year);
+		if (deltedPer != null)
+			for (PerformanceRecord per : deltedPer)
+				performanceRecordsCollection.deleteOne(Filters.eq("_id", per.getId()));
+
+		return deltedPer;
 	}
 
 	@Override
-	public PerformanceRecord updatePerformanceRecord(int id, String key, String value) {
-		return null;
+	public PerformanceRecord updatePerformanceRecord(int sid, String year, String key, String value) {
+		int val = 0;
+		Document fieldToUpdate;
+		List<PerformanceRecord> updatedS = readPerformanceRecords(sid, year);
+		if (updatedS != null) {
+			if (!key.toUpperCase().equals("description")) {
+				
+				fieldToUpdate = new Document(key, value);
+			} else {val = Integer.valueOf(value);
+			fieldToUpdate = new Document(key, val);}
+			
+
+			performanceRecordsCollection.updateOne(new Document("_id", updatedS.get(0).getId()),new Document("$set", fieldToUpdate)); 
+			updatedS = readPerformanceRecords(sid, year);
+			return updatedS.get(0);
+		} else
+			return null;
+
 	}
 }
