@@ -76,4 +76,8 @@ public class PerformanceRecord {
 		return "PerformanceRecord [id=" + id + ", sId=" + sId + ", description=" + description + ", targetValue="
 				+ targetValue + ", actualValue=" + actualValue + ", year=" + year + "]";
 	}
+
+	public static PerformanceRecord generatePerformanceRecord() {
+		return new PerformanceRecord(1,"default", 1, 1, 1);
+	}
 }

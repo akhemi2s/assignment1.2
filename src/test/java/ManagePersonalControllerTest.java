@@ -81,6 +81,31 @@ class ManagePersonalControllerTest {
 
     @Test
     void crudPerformanceRecordTest() {
-        /* todo */
+        /* test create */
+        Assertions.assertEquals(0, performanceRecordsCollection.count());
+        Assertions.assertEquals(0, salesmenCollection.count());
+
+        // trying to create a PerformanceRecord for a non existent Salesman
+        managePersonalController.createPerformanceRecord(PerformanceRecord.generatePerformanceRecord());
+        Assertions.assertEquals(0, performanceRecordsCollection.count());
+
+        // create Salesman with ID 1 then try again
+        managePersonalController.createSalesMan(SalesMan.generateSalesMan());
+        managePersonalController.createPerformanceRecord(PerformanceRecord.generatePerformanceRecord());
+        Assertions.assertEquals(1, performanceRecordsCollection.count());
+
+
+        /* test read */
+        List<PerformanceRecord> list = managePersonalController.readPerformanceRecords(1,0);
+        Assertions.assertEquals(1, list.size());
+
+        /* test update */
+        PerformanceRecord updatedPr = managePersonalController.updatePerformanceRecord(1,1, "description", "newDesc");
+        Assertions.assertEquals("newDesc", updatedPr.getDescription());
+
+        /* test delete */
+        PerformanceRecord deletedPr = managePersonalController.deletePerformanceRecord(1,1);
+        Assertions.assertNotNull(deletedPr);
+        Assertions.assertEquals(0, performanceRecordsCollection.count());
     }
 }

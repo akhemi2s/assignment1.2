@@ -42,7 +42,7 @@ public class ManagePersonalController implements ManagePersonal {
             s = new SalesMan(sid, (String) tmpDoc.get("name"), (String) tmpDoc.get("department"));
 
         } catch (NullPointerException e) {
-            System.out.print("SalesMan not found");
+            System.out.println("SalesMan not found");
         }
 
         return s;
@@ -94,6 +94,11 @@ public class ManagePersonalController implements ManagePersonal {
 
     @Override
     public void createPerformanceRecord(PerformanceRecord record) {
+        SalesMan s = readSalesMan(record.getsId());
+        if (s == null) {
+            System.out.println("there is no salesman with this ID");
+            return;
+        }
         MongoCursor<Document> cursor;
         int letztID = 0;
         cursor = performanceRecordsCollection.find().iterator();

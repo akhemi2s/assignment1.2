@@ -170,7 +170,7 @@ public class Main {
                         managePersonalController.createPerformanceRecord(per);
 
                     } catch (InputMismatchException e) {
-                        System.out.println("Enter a valid Values");
+                        System.out.println("Enter valid values");
                         break;
                     }
 
